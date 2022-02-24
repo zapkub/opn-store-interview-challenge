@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap');
+:root {
+  --background: #012d5e;
+  --font-color: #ffffff;
+  --blue: #5882e3;
+  --light-blue: #254870;
+  --yellow: #ffc107;
+  --red: #dc3545;
+  --white: #fff;
+}
+
+.AppContainer {
+    max-width: 800px;
+    margin: auto;
+}
+
+body{
+    background-color: var(--background);
+    color: var(--font-color);
+    font-family: 'Roboto Slab', serif;
+}
+
+.PatientTimeline {
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+  border: 1px solid var(--yellow);
+}
+
+.PatientTimeline__Item {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+}
+
+.PatientTimeline__Item__DateLabel::before {
+  width: 10px;
+  height: 10px;
+  background-color: var(--yellow);
+  content: "";
+  position: absolute;
+  right: -6px;
+  top: 20px;
+  border-radius: 50%;
+}
+
+.PatientTimeline__Item__DateLabel::after {
+  width: 10px;
+  height: 10px;
+  background-color: var(--light-blue);
+  content: "";
+  position: absolute;
+  right: -27px;
+  top: 20px;
+  transform: rotate(-45deg);
+}
+
+.PatientTimeline__Item__DateLabel {
+  font-size: x-small;
+  margin-right: 20px;
+  padding-top:18px;
+  color: var(--yellow);
+  position: relative;
+  padding-right: 14px;
+  border-right: 1px dashed var(--light-blue);
+  min-width: 50px;
+}
+
+
+.PatientTimelineEntry__Item {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  padding-left: 8px;
+  position: relative;
+  margin: 10px 0;
+}
+
+.PatientTimelineEntry__Item__Bubble {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    background-color: var(--light-blue);
+    padding: 8px;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.PatientTimelineEntry__Item__Times {
+  padding-top: 8px;
+  font-size: x-small;
+  margin-right: 28px;
+  color: var(--yellow);
+}
+
+.PatientTimelineEntry__Item__Data {
+  display: flex;
+  flex-direction: column;
+}
+
+.PatientTimelineEntry__Item__Data__Location {
+    color: var(--blue);
+    font-size: x-small;
+}
