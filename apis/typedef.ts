@@ -1,24 +1,29 @@
 import { gql } from "apollo-server";
 
 export const typeDefs = gql`
-    enum GenderType {
-        FEMALE
-        MALE
-        NON_BINARY
-        TRANSGENDER
-        INTERSEX
-    }
-    enum LocationType {
-      INDOOR
-    }
-    type Date {
-      rfc3339: String!
-    }
+  enum GenderType {
+    FEMALE
+    MALE
+    NON_BINARY
+    TRANSGENDER
+    INTERSEX
+  }
+  enum LocationType {
+    INDOOR
+    OUTDOOR
+  }
+  type Date {
+    rfc3339: String!
+  }
+  input DateInput {
+    rfc3339: String!
+  }
   type PatientProfile {
-      gender: GenderType!
-      age: Int!
-      occupation: String!
-      timeline: [PatientTimelineEntry!]!
+    id: String!
+    gender: GenderType!
+    age: Int!
+    occupation: String!
+    timeline: [PatientTimelineEntry!]!
   }
 
   type PatientTimelineEntry {
@@ -31,5 +36,29 @@ export const typeDefs = gql`
 
   type Query {
     patients: [PatientProfile!]
+  }
+
+  input PatientTimelineEntryInput {
+    from: DateInput
+    to: DateInput
+    detail: String
+    locationType: LocationType
+    locationName: String
+  }
+  input PatientProfileInput {
+    id: String
+    gender: GenderType!
+    age: Int!
+    occupation: String!
+    timeline: [PatientTimelineEntryInput!]
+  }
+
+  type Mutation {
+    upsertPatient(input: PatientProfileInput!): PatientProfile!
+    upsertPatients(input: [PatientProfileInput!]): [PatientProfile!]
+    removePatients(ids: [String]!): Boolean
+
+    addTimelineEntry(patientId: String!, input: PatientTimelineEntryInput!): PatientProfile!
+    removeTimelineEntry(patientId: String!, entryIndex: Int!): PatientProfile!
   }
 `;

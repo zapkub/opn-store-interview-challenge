@@ -8,27 +8,39 @@ type TabbarPropTypes = {
      */
     label: string;
   }>;
-  onChange: (index: number) => void;
+  onChange: (index: number, evt: React.MouseEvent) => void;
+  onAddButtonClick: (evt: React.MouseEvent) => void;
   selectedIndex: number;
 };
 export const Tabbar: ComponentType<TabbarPropTypes> = (props) => {
   const { items, selectedIndex } = props;
 
+  const onChange = (idx: number) => (_: React.MouseEvent) =>
+    props.onChange(idx, _);
+
   return (
-    <div>
-      {items.map((item, index) => {
-        return (
-          <div
-            className={`tabbar__item--${
-              selectedIndex === index ? "active" : "inactive"
-            }`}
-            key={index}
-          >
-            Patient
-            {item.label}
-          </div>
-        );
-      })}
+    <div className={"Tabbar"}>
+      <div className="Tabbar__Content">
+        <div className="Tabbar__Content__Scroll">
+          {items.map((item, index) => {
+            return (
+              <div
+                className={`Tabbar__Item Tabbar__Item--${
+                  selectedIndex === index ? "active" : "inactive"
+                }`}
+                onClick={onChange(index)}
+                key={index}
+              >
+                <label>Patient</label>
+                <div className="Tabbar__Item__Value">{item.label}</div>
+              </div>
+            );
+          })}
+        </div>
+        <div onClick={props.onAddButtonClick} className="Tabbar__Item__Add">
+          +
+        </div>
+      </div>
     </div>
   );
 };

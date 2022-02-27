@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap');
+
 :root {
   --background: #012d5e;
   --font-color: #ffffff;
@@ -9,23 +10,160 @@
   --white: #fff;
 }
 
-.AppContainer {
-    max-width: 800px;
-    margin: auto;
-}
-
 body{
+    margin: auto;
+    max-width: 1024px;
     background-color: var(--background);
     color: var(--font-color);
-    font-family: 'Roboto Slab', serif;
+    font-family: 'Roboto Slab', sans-serif;
+}
+
+h1 {
+    color: var(--yellow);
+}
+h3 {
+    color: var(--yellow);
+    font-weight: normal;
+}
+
+input {
+    padding: 6px 12px;
+    border: 1px var(--light-blue) solid;
+    box-sizing: border-box;
+    height: 38px;
+    border-radius: 5px;
+}
+select {
+    border: 1px var(--light-blue) solid;
+    padding: 6px 12px;
+    box-sizing: border-box;
+    height: 38px;
+    border-radius: 5px;
+}
+button {
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+}
+button:disabled {
+    background-color: grey !important;
+}
+
+label {
+    margin-bottom: 8px;
+}
+
+.Tabbar {
+    position: relative;
+}
+
+.x-small {
+    font-size: x-small;
+}
+
+.xx-small {
+    font-size: xx-small;
+}
+
+.AppContainer {
+    padding: 8px 8px;
+}
+
+.AppContainer__RemovePatientButtonWrapper {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.SyncIndicator {
+    margin: 20px 0;
+}
+.Tabbar__Content {
+    position: relative;
+}
+.Tabbar::after {
+    border-bottom: 2px var(--light-blue) solid;
+    position: absolute; 
+    width: 100%;
+    bottom: 0;
+    content: " ";
+    z-index: 0;
+}
+.Tabbar__Content__Scroll {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-right: 55px; /* remind for this is the width of add button */
+}
+.Tabbar__Item {
+    padding: 20px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 20px;
+    border: 2px solid var(--light-blue);
+    border-bottom: 0px;
+    cursor: pointer;
+}
+.Tabbar__Item--inactive {
+    border-bottom: 0px;
+}
+
+.Tabbar__Item--active {
+    color: var(--yellow);
+    position: relative;
+}
+.Tabbar__Item--active::after{
+    content: "";
+    border-bottom: 2px solid var(--background);
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    z-index: 9;
+}
+
+.Tabbar__Item:hover {
+    color: var(--yellow);
+}
+
+.Tabbar__Item label {
+    font-size: 18px;
+    font-weight: 500;
+}
+.Tabbar__Item__Value {
+    font-size: 2em;
+}
+.Tabbar__Item__Add {
+    font-size: 3em;
+    background-color: var(--light-blue);
+    color: var(--background);
+    width: 55px;
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+    align-self: center;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translateY(50%);
+}
+
+.Timeline__Content__Entry {
+  border: 1px solid var(--yellow);
+  margin-right: 20px;
+  padding: 20px;
+  flex-grow: 1;
 }
 
 .PatientTimeline {
   display: flex;
   flex-direction: column;
-  padding: 18px;
-  border: 1px solid var(--yellow);
 }
+
 
 .PatientTimeline__Item {
   display: flex;
@@ -66,6 +204,9 @@ body{
   min-width: 50px;
 }
 
+.PatientTimelineEntry {
+    flex: 1;
+}
 
 .PatientTimelineEntry__Item {
   display: flex;
@@ -73,14 +214,14 @@ body{
   align-items: stretch;
   padding-left: 8px;
   position: relative;
-  margin: 10px 0;
+  margin-bottom: 10px;
 }
 
 .PatientTimelineEntry__Item__Bubble {
     margin-top: 8px;
     margin-bottom: 8px;
     background-color: var(--light-blue);
-    padding: 8px;
+    padding: 8px 8px;
     border-radius: 4px;
     display: flex;
     flex-direction: column;
@@ -88,7 +229,6 @@ body{
 
 
 .PatientTimelineEntry__Item__Times {
-  padding-top: 8px;
   font-size: x-small;
   margin-right: 28px;
   color: var(--yellow);
@@ -102,4 +242,157 @@ body{
 .PatientTimelineEntry__Item__Data__Location {
     color: var(--blue);
     font-size: x-small;
+}
+
+
+.PatientInformation {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+.PatientInformation form {
+    padding: 16px;
+    border: var(--light-blue) 2px solid;
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    width: 100%;
+    position: relative;
+    box-sizing: border-box;
+}
+.PatientInformation__Field {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin-right: 20px;
+}
+.PatientInformation__Field:last-child {
+    margin-right: 0;
+}
+
+.PatientInformation__Field.Gender {
+    flex-grow: 1;
+}
+.PatientInformation__Field.Age {
+    flex-grow: 0;
+}
+.PatientInformation__Field.Occupation {
+    flex-grow: 2;
+}
+
+.Timeline__Content {
+    display: flex;
+}
+.Timeline__Content .PatientTimeline {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.PatientInformationBadge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 28px;
+}
+
+.PatientInformationBadge__Content {
+    background-color: var(--yellow);
+    padding: 16px 34px;
+    border-radius: 500px;
+    color: var(--background);
+    
+}
+.PatientInformationBadge__Content span {
+    display: block;
+    text-align: center;
+}
+
+.PatientTimelineEntryForm {
+    border: 2px solid var(--light-blue);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+.PatientTimelineEntryForm__DateInformation {
+    display: flex;
+    flex-direction: row;
+}
+.PatientTimelineEntryForm__Field {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+.PatientTimelineEntryForm__Field:last-child {
+    margin-right: 0;
+}
+
+.PatientTimelineEntryForm__Detail textarea {
+    height: 80px;
+    padding: 8px;
+}
+.PatientTimelineEntryForm__LocationInformation {
+    display: flex;
+}
+
+button.PatientTimelineEntryForm__AddButton {
+    background-color: var(--yellow);
+}
+
+
+div.Credit {
+   margin-top: 28px; 
+   text-align: center;
+   font-size: small;
+}
+
+button.RemovePatientButton {
+    background-color: var(--red);
+    color: var(--font-color);
+    margin-top: 28px;
+}
+
+
+.VisitedPlace {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    margin-bottom: 10px;
+    font-size: small;
+}
+.VisitedPlace__Item {
+    margin-right: 10px;
+}
+.VisitedPlace__Item:last-child {
+    margin-right: 0;
+}
+.PatientTimelineEntry__CloseButtonWrapped {
+    flex: 1;
+}
+.PatientTimelineEntry__CloseButtonWrapped button {
+    background-color: transparent;
+    color: var(--font-color);
+}
+
+@media screen and (max-width: 800px) {
+    .Timeline__Content {
+        flex-direction: column;
+    }
+    .PatientTimelineEntryForm {
+        margin-top: 24px;
+    }
+    .PatientInformation form {
+        flex-direction: column;
+    }
+    .PatientInformation__Field {
+        margin-right: 0;
+        margin-bottom: 14px;
+    }
+    .PatientInformation__Field:last-child {
+        margin-bottom: 0;
+    }
+    .Timeline__Content__Entry {
+        margin-right: 0;
+    }
 }

@@ -29,10 +29,13 @@ const PatientTimelineEntry: ComponentType<PatientTimelineEntryPropTypes> = ({
                 })}
               </div>
               <div className="PatientTimelineEntry__Item__Data">
-                {entry.detail}
+                <div style={{marginBottom: 10}}>{entry.detail}</div>
                 <div className="PatientTimelineEntry__Item__Data__Location">
                   {entry.locationType} - {entry.locationName}
                 </div>
+              </div>
+              <div className="PatientTimelineEntry__CloseButtonWrapped">
+                <button className="">✕</button>
               </div>
             </div>
           );
@@ -42,34 +45,17 @@ const PatientTimelineEntry: ComponentType<PatientTimelineEntryPropTypes> = ({
   );
 };
 
-type DateOnlyString = string;
-type TimelineItem = {
-  items: SchemaTypeDefs.PatientTimelineEntry[];
-  date: DateOnlyString;
+type PatientTimelineComponent = ComponentType<PatientTimelinePropTypes> & {
+  useTimeline(timelineEntries: SchemaTypeDefs.PatientTimelineEntry[]): Timeline;
 };
-type Timeline = Array<TimelineItem>;
 interface PatientTimelinePropTypes {
   patientTimeline?: SchemaTypeDefs.PatientTimelineEntry[];
 }
-export const PatientTimeLine: ComponentType<PatientTimelinePropTypes> = ({
+
+export const PatientTimeline: PatientTimelineComponent = ({
   patientTimeline = [],
 }) => {
-  const timelines = useMemo(
-    () =>
-      patientTimeline.reduce<Timeline>((prev, entry): Timeline => {
-        const date = new Date(entry.from.rfc3339).toLocaleDateString();
-        let timelineItems = prev.find((item) => item.date === date);
-        if (!timelineItems) {
-          timelineItems = { date, items: [entry] };
-          prev.push(timelineItems);
-        } else {
-          timelineItems.items.push(entry);
-        }
-        return prev;
-      }, []),
-    [patientTimeline]
-  );
-  console.log(patientTimeline, timelines);
+  const timelines = PatientTimeline.useTimeline(patientTimeline);
 
   return (
     <div className="PatientTimeline">
@@ -83,6 +69,41 @@ export const PatientTimeLine: ComponentType<PatientTimelinePropTypes> = ({
           </div>
         );
       })}
+      {
+          !timelines.length && (<div>No timeline entry yet 🌽</div>)
+      }
     </div>
+  );
+};
+
+type DateOnlyString = string;
+type TimelineItem = {
+  items: SchemaTypeDefs.PatientTimelineEntry[];
+  date: DateOnlyString;
+};
+type Timeline = Array<TimelineItem>;
+
+/**
+ * reduce the record item and group into
+ * a date based collection
+ */
+PatientTimeline.useTimeline = (
+  timelineEntries: SchemaTypeDefs.PatientTimelineEntry[]
+) => {
+  return useMemo(
+    () =>
+      timelineEntries.reduce<Timeline>((prev, entry): Timeline => {
+          const d = new Date(entry.from.rfc3339);
+        const date = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear() ;
+        let timelineItems = prev.find((item) => item.date === date);
+        if (!timelineItems) {
+          timelineItems = { date, items: [entry] };
+          prev.push(timelineItems);
+        } else {
+          timelineItems.items.push(entry);
+        }
+        return prev;
+      }, []),
+    [timelineEntries]
   );
 };
