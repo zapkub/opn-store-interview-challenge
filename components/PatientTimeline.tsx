@@ -34,7 +34,7 @@ const PatientTimelineEntry: ComponentType<PatientTimelineEntryPropTypes> = ({
                   {entry.locationType} - {entry.locationName}
                 </div>
               </div>
-              <div className="PatientTimelineEntry__CloseButtonWrapped">
+              <div onClick={() => alert('unimplemented')} className="PatientTimelineEntry__CloseButtonWrapped">
                 <button className="">✕</button>
               </div>
             </div>

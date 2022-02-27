@@ -47,7 +47,7 @@ export const PatientTimelineEntryForm: PatientTimelineEntryForm = ({
         case "locationName":
           nextValue[fieldName] = evt.currentTarget.value;
           break;
-        case "locationType": 
+        case "locationType":
           if (SchemaTypeDefs.isLocationType(evt.currentTarget.value)) {
             nextValue[fieldName] = evt.currentTarget.value;
           }
@@ -55,7 +55,10 @@ export const PatientTimelineEntryForm: PatientTimelineEntryForm = ({
       }
       onChange(nextValue, evt);
     };
-  console.log(value.from.rfc3339);
+
+  const isRequireLocationName =
+    value.locationType === SchemaTypeDefs.LocationType.INDOOR ||
+    value.locationType === SchemaTypeDefs.LocationType.OUTDOOR;
 
   return (
     <div className="PatientTimelineEntryForm">
@@ -97,24 +100,32 @@ export const PatientTimelineEntryForm: PatientTimelineEntryForm = ({
             value={value.locationType}
             onChange={onFieldNameChange("locationType")}
           >
+            <option>{SchemaTypeDefs.LocationType.HOME}</option>
             <option>{SchemaTypeDefs.LocationType.INDOOR}</option>
             <option>{SchemaTypeDefs.LocationType.OUTDOOR}</option>
+            <option>{SchemaTypeDefs.LocationType.TRAVELLING}</option>
           </select>
         </div>
         <div className="PatientTimelineEntryForm__Field">
-          <label>Location Name</label>
-          <input
-            value={value.locationName}
-            onChange={onFieldNameChange("locationName")}
-            type="text"
-            max={50}
-            placeholder="eg. Starbuck Rama4"
-          />
+          {
+            isRequireLocationName && <>
+              <label>Location Name</label>
+              <input
+                value={value.locationName}
+                onChange={onFieldNameChange("locationName")}
+                type="text"
+                max={50}
+                placeholder="eg. Starbuck Rama4"
+              />
+            </>
+          }
         </div>
       </div>
       <button
-        onClick={onAddEntryClick }
-        disabled={isLoading || !value.locationName.length || !value.detail.length}
+        onClick={(evt) => {
+          onAddEntryClick(evt);
+        }}
+        disabled={isLoading || !value.detail.length || (isRequireLocationName && !value.locationName.length)}
         className="PatientTimelineEntryForm__AddButton"
       >
         + Add Entry

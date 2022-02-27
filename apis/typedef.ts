@@ -11,6 +11,8 @@ export const typeDefs = gql`
   enum LocationType {
     INDOOR
     OUTDOOR
+    HOME
+    TRAVELLING
   }
   type Date {
     rfc3339: String!

@@ -2,6 +2,7 @@ import { createServer } from './apis';
 import express from 'express';
 import next from 'next';
 import { InmemoryDB } from './apis/db';
+import { parse } from 'url';
 
 (async function () {
 
@@ -10,14 +11,16 @@ import { InmemoryDB } from './apis/db';
     const app = express();
     const apis = createServer(app, db);
     const ui = next({
-        dev: process.env['NODE_ENV'] === 'production',
+        dev: process.env['NODE_ENV'] !== 'production',
     })
     await apis.start();
     apis.applyMiddleware({ app })
     await ui.prepare();
+    const handle = ui.getRequestHandler();
 
     app.all("*", (req, res, next) => {
-        ui.getRequestHandler()(req, res);
+        const parsedUrl = parse(req.url, true);
+        handle(req, res, parsedUrl);
     });
 
 

@@ -34,6 +34,9 @@ export const upsertPatientMutation = async (
       ...input,
     };
   } catch (e) {
+    if (!(e instanceof Error)) {
+      throw e
+    }
     if (!Database.Errors.isNotFoundError(e)) {
       throw e;
     }

@@ -8,8 +8,10 @@ export namespace Database {
   }
 
   export enum LocationType {
+    HOME = "HOME",
     INDOOR = "INDOOR",
-    OUTDOOR = "OUTDOOR"
+    OUTDOOR = "OUTDOOR",
+    TRAVELLING = "TRAVELLING"
   }
 
   export interface PatientTimelineRecord {

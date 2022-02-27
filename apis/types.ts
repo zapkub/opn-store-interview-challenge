@@ -18,7 +18,12 @@ export namespace SchemaTypeDefs {
   export type LocationType = Database.LocationType;
   export const LocationType = Database.LocationType;
   export const isLocationType = (value: any): value is LocationType => {
-    return value === LocationType.INDOOR || value === LocationType.OUTDOOR;
+    return (
+      value === LocationType.INDOOR ||
+      value === LocationType.OUTDOOR ||
+      value === LocationType.TRAVELLING ||
+      value === LocationType.HOME
+    );
   };
 
   export interface Date {

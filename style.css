@@ -369,6 +369,7 @@ button.RemovePatientButton {
 }
 .PatientTimelineEntry__CloseButtonWrapped {
     flex: 1;
+    text-align: right;
 }
 .PatientTimelineEntry__CloseButtonWrapped button {
     background-color: transparent;

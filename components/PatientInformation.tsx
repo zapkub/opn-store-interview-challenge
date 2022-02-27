@@ -117,7 +117,7 @@ export const PatientInformationBadge: PatientInformationBadgeComponent = ({
       <div className="PatientInformationBadge__Content">
         <span className="x-small">{value.gender}</span>
         <span>{value.age} Years Old</span>
-        <span className="x-small">{value.occupation}</span>
+        <span className="x-small">{value.occupation || '-'}</span>
       </div>
     </div>
   );

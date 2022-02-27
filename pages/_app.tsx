@@ -1,16 +1,24 @@
-import { AppProps } from "next/app";
+import { AppInitialProps, AppProps } from "next/app";
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from "@apollo/client";
 import 'normalize.css';
 import '../style.css';
 import { useRouter } from "next/router";
 import { nanoid } from "nanoid";
 
-const AppWithSetup = ({ Component, pageProps }: AppProps) => {
-  const router = useRouter();
+const AppWithSetup = ({ Component, pageProps, router }: AppProps) => {
+
+  if (!router.query['session-id'] && typeof window !== 'undefined') {
+    router.push({
+      query: {
+        'session-id': nanoid(),
+      }
+    })
+    return <div>reloading...</div>
+  }
 
   const httpLink = createHttpLink({
     uri: (operation) => {
-      return "/graphql?session-id=" + (router.query['session-id'] || nanoid());
+      return "/graphql?session-id=" + (router.query['session-id']);
     },
   });
 
@@ -27,5 +35,7 @@ const AppWithSetup = ({ Component, pageProps }: AppProps) => {
   );
 };
 
-
+AppWithSetup.getInitialProps = async (context: AppInitialProps) => {
+  return {}
+};
 export default AppWithSetup;

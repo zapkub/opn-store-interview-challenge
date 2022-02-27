@@ -19,8 +19,9 @@
     "react-dom": "^17.0.2"
   },
   "scripts": {
-    "start": "node -r esbuild-register index.ts",
-    "build": "next build"
+    "dev": "tsc --build --clean && node -r esbuild-register index.ts",
+    "build": "next build && tsc --project ./tsconfig.server.json",
+    "start": "NODE_ENV=production node ./index.js"
   },
   "devDependencies": {
     "@types/graphql": "^14.5.0",
