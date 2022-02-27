@@ -16,7 +16,6 @@ export class InmemoryDB implements Database.DB {
       this._data[sessionId] = {};
     }
     delete this._data[sessionId][key];
-    console.log(this._data[sessionId])
     return Promise.resolve();
   }
   write(

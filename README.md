@@ -62,3 +62,8 @@ $ yarn start
 - [ ] BONUS POINT I: Cover the use case with test.
 - [ ] BONUS POINT II: Feel free to make it better than the given design 😉
 - [x] BONUS POINT III: Use GraphQL as API
+
+
+## Screenshot
+![ss1](./resources/ss1.png)
+![ss1](./resources/ss2.png)
