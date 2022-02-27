@@ -94,7 +94,12 @@ export default () => {
           </div>
         </>
       )}
-      <div className="Credit">Made With ❤️ Rungsikorn.R</div>
+      <div className="Credit">
+        Made With ❤️ Rungsikorn.R,{" "}
+        <a style={{color: 'white'}} href="https://github.com/zapkub/opn-store-interview-challenge">
+          Github
+        </a>
+      </div>
     </div>
   );
 };

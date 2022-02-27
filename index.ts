@@ -25,7 +25,8 @@ import { parse } from 'url';
 
 
     app.listen(8888, () => {
-        console.log('server started : http://localhost:8888');
+        console.log('server started: http://localhost:8888');
+        console.log('for session with seed data : http://localhost:8888?session-id=default');
     });
 
 })();
