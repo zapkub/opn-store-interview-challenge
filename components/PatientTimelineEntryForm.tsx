@@ -66,7 +66,7 @@ export const PatientTimelineEntryForm: PatientTimelineEntryForm = ({
         <div className="PatientTimelineEntryForm__Field">
           <label>Form</label>
           <input
-            value={value.from.rfc3339.substring(0, 16)}
+            value={new Date(value.from.rfc3339).toLocaleString('sv').replace(' ', 'T')}
             onChange={onFieldNameChange("from")}
             type="datetime-local"
             placeholder="dd/mm/yyyy --:--"
@@ -75,7 +75,7 @@ export const PatientTimelineEntryForm: PatientTimelineEntryForm = ({
         <div className="PatientTimelineEntryForm__Field">
           <label>To</label>
           <input
-            value={value.to.rfc3339.substring(11, 16)}
+            value={new Date(value.to.rfc3339).toLocaleString('sv').substring(11, 16)}
             onChange={onFieldNameChange("to")}
             type="time"
             placeholder="--:--"

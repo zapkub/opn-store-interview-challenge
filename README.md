@@ -24,12 +24,13 @@ $ yarn build
 $ yarn start
 ```
 
+> The DB have some seed for your convinence please use `?session-id=default` to get some seed without adding the data by yourself 😎
 
 
 
 ## Todo
-
-- [x] User can click on (+) to add new patient up to ~~8~~ no limit patients.
+- [ ] ~~User can click on (+) to add new patient up to 8 patients.~~
+- [x] User can click on (+) to add new patient up to no limit patients.
 - [x] User can add each patient information using form on top, the patient contains these data
   - Gender: string
   - Age: integer

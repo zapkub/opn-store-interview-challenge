@@ -1,8 +1,6 @@
 import { AppInitialProps, AppProps } from "next/app";
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from "@apollo/client";
-import 'normalize.css';
 import '../style.css';
-import { useRouter } from "next/router";
 import { nanoid } from "nanoid";
 
 const AppWithSetup = ({ Component, pageProps, router }: AppProps) => {
