@@ -1,7 +1,7 @@
 import { ApiContext } from "./context";
 
 export const removePatientsMutation = async (
-  _source,
+  _source: unknown,
   arg: { ids: string[] },
   ctx: ApiContext
 ): Promise<boolean> => {

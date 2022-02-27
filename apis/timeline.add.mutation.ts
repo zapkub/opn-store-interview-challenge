@@ -3,7 +3,7 @@ import { SchemaTypeDefs } from "./types";
 import { sortBy } from 'lodash'
 
 export const addTimelineEntry = async (
-  source,
+  _source: unknown,
   arg: { patientId: string; input: SchemaTypeDefs.PatientTimelineEntryInput },
   ctx: ApiContext
 ): Promise<SchemaTypeDefs.PatientProfile> => {

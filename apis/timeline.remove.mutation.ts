@@ -2,7 +2,7 @@ import { ApiContext } from "./context";
 import { SchemaTypeDefs } from "./types";
 
 export const removeTimelineEntry = async (
-  source,
+  _source: unknown,
   args: { patientId: string; entryIndex: number },
   ctx: ApiContext
 ): Promise<SchemaTypeDefs.PatientProfile> => {

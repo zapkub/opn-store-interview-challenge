@@ -4,7 +4,7 @@ import { Database } from "./db";
 import { SchemaTypeDefs } from "./types";
 
 export const upsertPatientsMutation = (
-  _source,
+  _source: unknown,
   arg: { input: SchemaTypeDefs.PatientProfileInput[] },
   ctx: ApiContext
 ) => {
@@ -16,7 +16,7 @@ export const upsertPatientsMutation = (
 };
 
 export const upsertPatientMutation = async (
-  _source,
+  _source: unknown,
   { input }: { input: SchemaTypeDefs.PatientProfileInput },
   ctx: ApiContext
 ): Promise<SchemaTypeDefs.PatientProfile> => {
